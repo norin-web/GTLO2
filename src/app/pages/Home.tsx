@@ -45,7 +45,6 @@ export default function Home() {
               <Btn href={app.url}>Download on the App Store</Btn>
               <a className="textlink" href="#story">How it works</a>
             </div>
-            <p className="ob__fine">Free to download. Needs iOS {app.minIOS} or later.</p>
           </div>
           <div className="ob__scene">
             <img className="ob__photo" src={img("/images/woman-phone.webp")} alt="A woman reading a message on her iPhone" width={900} height={1518} />
