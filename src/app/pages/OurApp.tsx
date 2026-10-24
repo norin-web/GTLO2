@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { app, site, specs, tour } from "../content/site";
+import { app, billing, site, specs, tour } from "../content/site";
 import { img } from "../utils/img";
 import Btn from "../components/Btn";
 
@@ -44,35 +44,34 @@ export default function OurApp() {
         </div>
       </section>
 
-      {/* Store facts + subscription */}
+      {/* How paying works, as the four things that actually happen, then the store facts in one strip */}
       <section className="section">
-        <div className="container facts">
-          <div className="storecard">
-            <div className="storecard__head">
-              <img src={img("/images/app-icon.png")} alt="" width={88} height={88} />
+        <div className="container billing">
+          <h2 className="h2 billing__title">Free to explore. Subscribe to write.</h2>
+          <ol className="billing__steps">
+            {billing.map((b) => (
+              <li key={b.title}>
+                <h3>{b.title}</h3>
+                <p>{b.text}</p>
+              </li>
+            ))}
+          </ol>
+          <div className="storestrip">
+            <div className="storestrip__id">
+              <img src={img("/images/app-icon.png")} alt="" width={56} height={56} />
               <div>
                 <b>{site.brand}</b>
                 <span>{site.category}</span>
               </div>
             </div>
-            <dl className="specs">
-              {specs.map(([k, v]) => (
+            <dl className="storestrip__specs">
+              {specs.filter(([k]) => k !== "Price").map(([k, v]) => (
                 <div key={k}>
                   <dt>{k}</dt>
                   <dd>{v}</dd>
                 </div>
               ))}
             </dl>
-          </div>
-          <div className="sub">
-            <h2 className="h3">Free to explore. Subscribe to write.</h2>
-            <ul className="sub__list">
-              <li>Downloading {site.brand} costs nothing.</li>
-              <li>Messaging with inmates is available with a subscription only.</li>
-              <li>Payment is charged to your Apple ID when you confirm the purchase.</li>
-              <li>It renews automatically unless you turn auto-renew off at least 24 hours before the period ends.</li>
-              <li>Deleting the app does not cancel it. Manage it in your Apple ID settings.</li>
-            </ul>
           </div>
         </div>
       </section>

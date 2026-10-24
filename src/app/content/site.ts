@@ -125,6 +125,14 @@ export const specs: [string, string][] = [
   ["Provider", site.operator],
 ];
 
+// App page: how paying works, in the order it happens (App Store listing + Terms §10)
+export const billing = [
+  { title: "Download for free", text: `Installing ${site.brand} and looking around costs nothing.` },
+  { title: "Subscribe to write", text: "Messaging with inmates needs an active subscription, charged to your Apple ID." },
+  { title: "It renews on its own", text: "Unless you turn auto-renew off at least 24 hours before the period ends." },
+  { title: "Cancel any time", text: "In iPhone Settings under your Apple ID. Deleting the app does not cancel it." },
+];
+
 export const values = [
   { title: "Plain over clever", text: "Every screen does one job. If a step needs explaining, we redesign the step." },
   { title: "Straight about limits", text: "We say up front what depends on the facility, what costs money and what the AI can’t promise." },
