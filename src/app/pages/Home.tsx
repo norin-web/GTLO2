@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router";
+import { ArrowUp } from "lucide-react";
 import { app, chapters, features, moments, notes } from "../content/site";
 import { img } from "../utils/img";
 import Btn from "../components/Btn";
 import Icon from "../components/Icon";
-import Split from "../components/Split";
 
 /** Chapter whose text crosses the middle of the viewport drives the sticky phone. */
 function useActiveChapter(count: number) {
@@ -20,33 +21,43 @@ function useActiveChapter(count: number) {
   return { refs, active };
 }
 
+// Hero thread, from the first onboarding screen of the app (newest on top, as there)
+const thread = [
+  { me: false, text: "I will. We all love you.", time: "11:45 AM" },
+  { me: true, text: "Tell them Dad loves them. I can’t wait to hear their voices.", time: "11:44 AM" },
+  { me: false, text: "I miss you too. The kids were asking about you this morning.", time: "11:43 AM" },
+  { me: true, text: "Been thinking about you all day. Miss you so much…", time: "11:42 AM" },
+];
+
 export default function Home() {
   const { refs, active } = useActiveChapter(chapters.length);
   const [m, setM] = useState(0);
 
   return (
     <>
-      {/* Hero: an airmail envelope; the real app sits on the stamp */}
-      <section className="hero">
-        <div className="container">
-          <div className="envelope">
-            <div className="envelope__copy">
-              <Split as="h1" className="h-hero" parts={[["Keep the line open"], ["\n"], ["while they’re away."]]} />
-              <p className="lead">Find their facility and write to them from your iPhone.</p>
-              <div className="hero__cta">
-                <Btn href={app.url}>Download on the App Store</Btn>
-                <a className="textlink" href="#story">How it works</a>
-              </div>
-              <p className="hero__fine">Free to download. Needs iOS {app.minIOS} or later.</p>
+      {/* Hero: the onboarding screen of the app, opened up to page width */}
+      <section className="ob">
+        <div className="container ob__grid">
+          <div className="ob__copy">
+            <h1 className="h-hero">Keep the line open while they’re away.</h1>
+            <p className="lead">Find their facility and write to them from your iPhone.</p>
+            <div className="ob__cta">
+              <Btn href={app.url}>Download on the App Store</Btn>
+              <a className="textlink" href="#story">How it works</a>
             </div>
-            <div className="envelope__post">
-              <svg className="cancel" viewBox="0 0 220 120" aria-hidden="true">
-                <path d="M0 20c18-10 37-10 55 0s37 10 55 0 37-10 55 0 37 10 55 0M0 50c18-10 37-10 55 0s37 10 55 0 37-10 55 0 37 10 55 0M0 80c18-10 37-10 55 0s37 10 55 0 37-10 55 0 37 10 55 0M0 110c18-10 37-10 55 0s37 10 55 0 37-10 55 0 37 10 55 0" />
-              </svg>
-              <figure className="stamp">
-                <img src={img("/images/hand-phone.webp")} alt="A hand holding an iPhone with the Getting Out message list open" width={1100} height={1904} />
-              </figure>
-            </div>
+            <p className="ob__fine">Free to download. Needs iOS {app.minIOS} or later.</p>
+          </div>
+          <div className="ob__scene">
+            <img className="ob__photo" src={img("/images/woman-phone.webp")} alt="A woman reading a message on her iPhone" width={900} height={1518} />
+            <ol className="ob__thread" aria-label="An example conversation">
+              {thread.map((b, i) => (
+                <li key={b.time} className={`msg${b.me ? " msg--me" : ""}`} style={{ ["--d" as string]: thread.length - 1 - i }}>
+                  <p>{b.text}</p>
+                  <time>{b.time}</time>
+                  {b.me && <img className="msg__ava" src={img("/images/avatar-inside.webp")} alt="" width={48} height={48} />}
+                </li>
+              ))}
+            </ol>
           </div>
         </div>
       </section>
@@ -77,14 +88,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* What is in the app: a plain list, not a card grid */}
-      <section className="section">
+      {/* What is in the app: one grouped list, the way iOS Settings shows it */}
+      <section className="section section--deep">
         <div className="container inapp">
           <h2 className="h2">Small tools for a long distance.</h2>
-          <ul className="inapp__list">
+          <ul className="group">
             {features.map((f) => (
               <li key={f.title}>
-                <Icon name={f.icon} size={22} />
+                <span className="group__ico"><Icon name={f.icon} size={20} /></span>
                 <div>
                   <h3>{f.title}</h3>
                   <p>{f.text}</p>
@@ -95,8 +106,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* AI demo */}
-      <section className="section section--mist">
+      {/* AI demo, drawn like the AI Assistant screen */}
+      <section className="section">
         <div className="container ai">
           <div className="ai__copy">
             <h2 className="h2">Help with the words, not with the feelings.</h2>
@@ -109,19 +120,23 @@ export default function Home() {
               ))}
             </div>
           </div>
-          <div className="ai__chat" aria-live="polite">
-            <p className="ai__bar"><Icon name="sparkles" size={16} />AI Assistant</p>
-            <div className="ai__thread" key={m}>
-              <p className="bubble bubble--me">{moments[m].ask}</p>
-              <p className="bubble bubble--ai">{moments[m].draft}</p>
-              <p className="ai__note">An example written for this page. Always read a draft before you send it.</p>
+          <div className="aiscreen" aria-live="polite">
+            <p className="aiscreen__bar"><span className="aiscreen__badge"><Icon name="sparkles" size={16} /></span>AI Assistant</p>
+            <div className="aiscreen__thread" key={m}>
+              <p className="msg msg--me msg--flat"><span>{moments[m].ask}</span></p>
+              <p className="msg msg--flat"><span>{moments[m].draft}</span></p>
             </div>
+            <div className="aiscreen__input" aria-hidden="true">
+              <span>Ask AI to write a message</span>
+              <span className="aiscreen__send"><ArrowUp size={18} /></span>
+            </div>
+            <p className="aiscreen__note">An example written for this page. Always read a draft before you send it.</p>
           </div>
         </div>
       </section>
 
       {/* Good to know */}
-      <section className="section">
+      <section className="section section--top0">
         <div className="container notes">
           <h2 className="h2">Good to know before you start.</h2>
           <dl className="notes__list">
@@ -135,12 +150,19 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Closing action */}
+      {/* Closing: the bottom sheet of the onboarding screen */}
       <section className="closing">
-        <div className="container closing__inner">
-          <img src={img("/images/app-icon.png")} alt="" width={72} height={72} />
-          <h2 className="h2">Write the first line today.</h2>
-          <Btn href={app.url} variant="paper">Download on the App Store</Btn>
+        <div className="container">
+          <div className="sheet">
+            <img src={img("/images/app-icon.png")} alt="" width={72} height={72} />
+            <h2 className="h2">Write the first line today.</h2>
+            <p className="lead">Stay close to the person you’re waiting for, one message at a time.</p>
+            <Btn href={app.url} className="sheet__btn">Download on the App Store</Btn>
+            <p className="sheet__links">
+              <Link to="/privacy">Privacy Policy</Link>
+              <Link to="/terms">Terms of Use</Link>
+            </p>
+          </div>
         </div>
       </section>
     </>
