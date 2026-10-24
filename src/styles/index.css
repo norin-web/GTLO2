@@ -1,4 +1,4 @@
-/* Hallmark · v2.0.0 · redesign (app design "Getting Out v2") · genre modern-minimal · theme: custom (the app's own aqua gradient, ink, teal) · signature: the hero is the app's first onboarding screen opened up to page width, the conversation arrives one bubble at a time · deal: manual */
+/* Hallmark · v2.0.0 · redesign (app design "Getting Out v2") · genre modern-minimal · theme: custom (the app's own aqua gradient, ink, teal) · signature: the hero is the app's aqua screen with the real app held in a hand, placed by the designer in Paper · deal: manual */
 /* critique: the "Airmail" concept spoke its own visual language; the site now continues the app itself: aqua gradient screens, teal pill buttons, teal and frosted bubbles, grouped iOS lists and the onboarding bottom sheet */
 /* waive 62: .story__frame stacks the chapter screens and crossfades them; the active screen is always visible, the stack needs the script that also renders the page (React SPA) */
 @import "tailwindcss" source(none);
@@ -34,7 +34,6 @@
   --bubble: rgb(233 238 240 / 0.82);
   --bubble-edge: rgb(255 255 255 / 0.7);
   --sheet-top: #d3f6f7;
-  --mask: #000;
   --danger: #b8322b;
   --ok-bg: #dff5ee;
   --ok-ink: #17635f;
@@ -151,48 +150,22 @@ ul, ol { padding: 0; list-style: none; }
 .section--top0 { padding-top: 0; }
 .section--mist, .section--deep { background: var(--gradient); }
 
-/* ── Home hero: the onboarding screen ─────────────────────── */
-.ob { background: var(--gradient); overflow: hidden; }
-.ob__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--col-gap); align-items: end; }
-.ob__copy { display: grid; gap: 28px; justify-items: start; align-self: center; padding: clamp(48px, 6vw, 96px) 0; }
+/* ── Home hero: aqua screen, the app in a hand ─────────── */
+.ob { position: relative; background: var(--gradient); overflow: hidden; }
+.ob__grid { position: relative; display: grid; grid-template-columns: minmax(0, 558px); min-height: 753px; align-items: center; }
+.ob__copy { position: relative; z-index: 1; display: grid; gap: 28px; justify-items: start; padding: 96px 0; }
 .ob__cta { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
-.ob__scene { position: relative; min-height: 560px; display: flex; justify-content: flex-start; align-items: flex-end; }
-.ob__photo { width: min(100%, 380px); height: auto; margin-top: 32px; -webkit-mask-image: linear-gradient(to right, transparent, var(--mask) 16%); mask-image: linear-gradient(to right, transparent, var(--mask) 16%); }
-.ob__thread { position: absolute; right: 0; bottom: 56px; width: min(100%, 380px); display: flex; flex-direction: column; align-items: flex-end; gap: 12px; }
-
-.msg {
-  position: relative; max-width: 100%; padding: 12px 16px 8px; border-radius: 22px;
-  background: var(--bubble); border: 1px solid var(--bubble-edge); color: var(--ink);
-  font-size: 15px; line-height: 1.35; box-shadow: var(--shadow-sm);
-}
-.msg p { text-align: right; }
-.msg time { display: block; margin-top: 4px; font-size: 11px; color: var(--muted); }
-.msg--me { background: var(--teal); border-color: var(--teal); color: var(--on-teal); padding-right: 72px; }
-.msg--me p { text-align: left; }
-.msg--me time { color: var(--on-teal-muted); text-align: right; }
-.msg__ava { position: absolute; right: 12px; top: 50%; width: 44px; height: 44px; transform: translateY(-50%); border-radius: 50%; border: 2px solid var(--bubble-edge); object-fit: cover; }
-
-/* the one authored motion: the conversation arrives, oldest message first */
-.ob__thread .msg { animation: arrive 0.6s var(--ease) both; animation-delay: calc(0.35s + var(--d) * 0.45s); }
-@keyframes arrive { from { opacity: 0; transform: translateY(16px) scale(0.96); } }
+/* placed as in the Paper layout: 621px wide, turned 15° back around its top-left corner, cut by the hero edge */
+.ob__scene { position: absolute; inset: 0; pointer-events: none; }
+.ob__phone { position: absolute; left: calc(100% - 763px); top: 87px; width: 621px; max-width: none; transform-origin: 0 0; transform: rotate(-15deg); }
 
 @media (max-width: 900px) {
-  .ob__grid { grid-template-columns: minmax(0, 1fr); gap: 0; }
-  .ob__copy { padding: 32px 0 48px; gap: 24px; }
-  .ob__scene { order: -1; min-height: 0; justify-content: flex-start; }
-  .ob__photo {
-    width: min(72%, 320px); margin-top: 16px;
-    -webkit-mask-image: linear-gradient(to right, transparent, var(--mask) 16%), linear-gradient(to bottom, var(--mask) 78%, transparent);
-    mask-image: linear-gradient(to right, transparent, var(--mask) 16%), linear-gradient(to bottom, var(--mask) 78%, transparent);
-    -webkit-mask-composite: source-in; mask-composite: intersect;
-  }
-  .ob__thread { width: min(86%, 340px); bottom: 16px; gap: 8px; }
-  .msg { font-size: 14px; padding: 8px 12px 8px; border-radius: 18px; }
-  .msg--me { padding-right: 56px; }
-  .msg__ava { width: 36px; height: 36px; right: 8px; }
+  .ob__grid { grid-template-columns: minmax(0, 1fr); min-height: 0; }
+  .ob__copy { padding: 40px 0 8px; gap: 24px; }
+  .ob__scene { position: relative; inset: auto; height: 420px; margin: 0 calc(var(--gutter) * -1); }
+  .ob__phone { left: calc(50% - 170px); top: 72px; width: 320px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .ob__thread .msg { animation: none; }
   .story__frame img { transition: none !important; }
 }
 
@@ -243,8 +216,8 @@ ul, ol { padding: 0; list-style: none; }
 .aiscreen__bar { display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 18px; color: var(--ink); }
 .aiscreen__badge { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: var(--teal); color: var(--on-teal); }
 .aiscreen__thread { display: grid; gap: 12px; align-content: start; min-height: 260px; }
-.msg--flat { box-shadow: none; padding: 12px 16px; max-width: 88%; justify-self: start; }
-.msg--flat.msg--me { justify-self: end; padding-right: 16px; }
+.msg { padding: 12px 16px; max-width: 88%; justify-self: start; border-radius: 22px; background: var(--bubble); border: 1px solid var(--bubble-edge); color: var(--ink); font-size: 15px; line-height: 1.35; }
+.msg--me { justify-self: end; background: var(--teal); border-color: var(--teal); color: var(--on-teal); }
 .aiscreen__input { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 52px; padding: 4px 4px 4px 20px; border-radius: 999px; background: var(--frost); border: 1px solid var(--edge); color: var(--faint); font-size: 15px; }
 .aiscreen__send { width: 44px; height: 44px; flex: none; border-radius: 50%; display: grid; place-items: center; background: var(--teal); color: var(--on-teal); }
 .aiscreen__note { font-size: 13px; color: var(--muted); }

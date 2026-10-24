@@ -21,21 +21,13 @@ function useActiveChapter(count: number) {
   return { refs, active };
 }
 
-// Hero thread, from the first onboarding screen of the app (newest on top, as there)
-const thread = [
-  { me: false, text: "I will. We all love you.", time: "11:45 AM" },
-  { me: true, text: "Tell them Dad loves them. I can’t wait to hear their voices.", time: "11:44 AM" },
-  { me: false, text: "I miss you too. The kids were asking about you this morning.", time: "11:43 AM" },
-  { me: true, text: "Been thinking about you all day. Miss you so much…", time: "11:42 AM" },
-];
-
 export default function Home() {
   const { refs, active } = useActiveChapter(chapters.length);
   const [m, setM] = useState(0);
 
   return (
     <>
-      {/* Hero: the onboarding screen of the app, opened up to page width */}
+      {/* Hero: copy on the app’s aqua gradient, the real app in a hand on the right */}
       <section className="ob">
         <div className="container ob__grid">
           <div className="ob__copy">
@@ -47,16 +39,7 @@ export default function Home() {
             </div>
           </div>
           <div className="ob__scene">
-            <img className="ob__photo" src={img("/images/woman-phone.webp")} alt="A woman reading a message on her iPhone" width={900} height={1518} />
-            <ol className="ob__thread" aria-label="An example conversation">
-              {thread.map((b, i) => (
-                <li key={b.time} className={`msg${b.me ? " msg--me" : ""}`} style={{ ["--d" as string]: thread.length - 1 - i }}>
-                  <p>{b.text}</p>
-                  <time>{b.time}</time>
-                  {b.me && <img className="msg__ava" src={img("/images/avatar-inside.webp")} alt="" width={48} height={48} />}
-                </li>
-              ))}
-            </ol>
+            <img className="ob__phone" src={img("/images/hero-hand.webp")} alt="A hand holding an iPhone with the Getting Out message list open" width={1216} height={2105} />
           </div>
         </div>
       </section>
@@ -122,8 +105,8 @@ export default function Home() {
           <div className="aiscreen" aria-live="polite">
             <p className="aiscreen__bar"><span className="aiscreen__badge"><Icon name="sparkles" size={16} /></span>AI Assistant</p>
             <div className="aiscreen__thread" key={m}>
-              <p className="msg msg--me msg--flat"><span>{moments[m].ask}</span></p>
-              <p className="msg msg--flat"><span>{moments[m].draft}</span></p>
+              <p className="msg msg--me"><span>{moments[m].ask}</span></p>
+              <p className="msg"><span>{moments[m].draft}</span></p>
             </div>
             <div className="aiscreen__input" aria-hidden="true">
               <span>Ask AI to write a message</span>
