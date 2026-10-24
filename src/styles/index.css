@@ -240,7 +240,7 @@ ul, ol { padding: 0; list-style: none; }
 .phero__copy { display: grid; gap: 24px; justify-items: start; }
 .phero__photo { border-radius: var(--r-panel); overflow: hidden; background: var(--photo-ground); color: var(--on-ink); height: clamp(420px, 44vw, 560px); }
 .phero__photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
-.wide-photo { width: 100%; height: clamp(280px, 36vw, 480px); object-fit: cover; object-position: center 14%; border-radius: var(--r-panel); }
+.wide-photo { width: 100%; height: clamp(280px, 36vw, 480px); object-fit: cover; object-position: center 40%; border-radius: var(--r-panel); }
 @media (max-width: 900px) { .phero__grid { grid-template-columns: minmax(0, 1fr); gap: 40px; } .phero__photo { height: 400px; } }
 
 /* ── App tour ─────────────────────────────────────────────── */
