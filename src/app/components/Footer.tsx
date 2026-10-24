@@ -41,11 +41,6 @@ export default function Footer() {
           <span className="footer__hint">Questions, feedback and privacy requests.</span>
         </div>
       </div>
-
-      <div className="container footer__legal">
-        <p>© {site.year} {site.operator}, {site.address}</p>
-        <p>{site.disclaimer}</p>
-      </div>
     </footer>
   );
 }

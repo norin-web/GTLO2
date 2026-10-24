@@ -430,7 +430,7 @@ ul, ol { padding: 0; list-style: none; }
 .notfound { min-height: 60vh; display: grid; align-content: center; }
 
 /* ── Footer: the end of the aqua screen ───────────────────── */
-.footer { background: var(--aqua-bot); color: var(--muted); padding: clamp(48px, 6vw, 72px) 0 32px; border-top: 1px solid var(--edge); }
+.footer { background: var(--aqua-bot); color: var(--muted); padding: clamp(48px, 6vw, 72px) 0; border-top: 1px solid var(--edge); }
 .footer__grid { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.2fr); gap: var(--col-gap); }
 .footer__brand { display: grid; gap: 20px; justify-items: start; align-content: start; }
 .footer__id { display: flex; gap: 16px; align-items: center; }
@@ -444,6 +444,5 @@ ul, ol { padding: 0; list-style: none; }
 .footer__col a { color: var(--text); min-height: 32px; display: inline-flex; align-items: center; }
 .footer__col a:hover { color: var(--teal-deep); text-decoration: underline; }
 .footer__hint { color: var(--muted); font-size: 14px; }
-.footer__legal { display: grid; gap: 8px; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
 @media (max-width: 960px) { .footer__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .footer__brand { grid-column: 1 / -1; } }
 @media (max-width: 520px) { .footer__grid { grid-template-columns: minmax(0, 1fr); } .footer__col a { overflow-wrap: anywhere; } }

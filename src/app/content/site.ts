@@ -5,13 +5,9 @@ export const site = {
   brand: "Getting Out",
   category: "Inmate messaging for iPhone",
   email: "coj@promstarservice.store",
-  year: new Date().getFullYear(),
   // Name and address as in the Privacy Policy / Terms (2026-10-24). App Store seller: "PROMSTAR SERVICE, SRL".
   operator: "S.R.L. PROMSTAR SERVICE",
   address: "Republic of Moldova, Chisinau Municipality, Ciocana Sector, 116/10 Ismail Street, Apt./Off. 2",
-  // follows Terms §8–9 and Privacy §10
-  disclaimer:
-    "The GettingOut name is used under a Brand Name and Trademark Authorization Agreement with Global Tel*Link Corporation, doing business as ViaPath Technologies; the trademarks remain with their owner. The app is not operated by a government agency or correctional institution and is not endorsed by any prison, jail or public authority.",
 };
 
 export const app = {
