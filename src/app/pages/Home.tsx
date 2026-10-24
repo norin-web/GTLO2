@@ -26,21 +26,28 @@ export default function Home() {
 
   return (
     <>
-      {/* Hero: the real app in a hand, the one authored motion is the headline */}
+      {/* Hero: an airmail envelope; the real app sits on the stamp */}
       <section className="hero">
-        <div className="container hero__grid">
-          <div className="hero__copy">
-            <Split as="h1" className="h-hero" parts={[["Keep the line open"], ["\n"], ["while they’re away."]]} />
-            <p className="lead">Find their facility and write to them from your iPhone.</p>
-            <div className="hero__cta">
-              <Btn href={app.url}>Download on the App Store</Btn>
-              <a className="textlink" href="#story">How it works</a>
+        <div className="container">
+          <div className="envelope">
+            <div className="envelope__copy">
+              <Split as="h1" className="h-hero" parts={[["Keep the line open"], ["\n"], ["while they’re away."]]} />
+              <p className="lead">Find their facility and write to them from your iPhone.</p>
+              <div className="hero__cta">
+                <Btn href={app.url}>Download on the App Store</Btn>
+                <a className="textlink" href="#story">How it works</a>
+              </div>
+              <p className="hero__fine">Free to download. Needs iOS {app.minIOS} or later.</p>
             </div>
-            <p className="hero__fine">Free to download. Needs iOS {app.minIOS} or later.</p>
+            <div className="envelope__post">
+              <svg className="cancel" viewBox="0 0 220 120" aria-hidden="true">
+                <path d="M0 20c18-10 37-10 55 0s37 10 55 0 37-10 55 0 37 10 55 0M0 50c18-10 37-10 55 0s37 10 55 0 37-10 55 0 37 10 55 0M0 80c18-10 37-10 55 0s37 10 55 0 37-10 55 0 37 10 55 0M0 110c18-10 37-10 55 0s37 10 55 0 37-10 55 0 37 10 55 0" />
+              </svg>
+              <figure className="stamp">
+                <img src={img("/images/hand-phone.webp")} alt="A hand holding an iPhone with the Getting Out message list open" width={1100} height={1904} />
+              </figure>
+            </div>
           </div>
-          <figure className="hero__visual">
-            <img src={img("/images/hand-phone.webp")} alt="A hand holding an iPhone with the Getting Out message list open" width={1100} height={1904} />
-          </figure>
         </div>
       </section>
 

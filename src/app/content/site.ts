@@ -20,6 +20,8 @@ export const app = {
   minIOS: "18.6",
   category: "Social Networking",
   languages: 9,
+  version: "1.0",
+  released: "October 16, 2026",
 };
 
 // `icon` keys resolve in components/Icon.tsx

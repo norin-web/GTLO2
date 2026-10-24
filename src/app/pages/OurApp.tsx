@@ -14,6 +14,18 @@ export default function OurApp() {
 
   return (
     <>
+      {/* Banner: an airmail label with the one piece of news the store confirms */}
+      <div className="container">
+        <a className="airlabel" href={app.url} target="_blank" rel="noopener noreferrer">
+          <span className="airlabel__tag">Par avion</span>
+          <span className="airlabel__text">
+            <b>{site.brand} {app.version} is on the App Store.</b>
+            <span>Released {app.released}. Free to download for iPhone.</span>
+          </span>
+          <span className="airlabel__go">Get the app</span>
+        </a>
+      </div>
+
       {/* Hero: the app itself is the picture, seven real screens on one shelf */}
       <section className="apphero">
         <div className="container">

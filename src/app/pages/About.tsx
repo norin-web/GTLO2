@@ -12,12 +12,12 @@ export default function About() {
         </div>
       </section>
 
-      <div className="container">
-        <img className="wide-photo" src={img("/images/together.webp")} alt="A woman smiling at a message on her phone" width={1400} height={2488} />
-      </div>
-
       <section className="section">
         <div className="container values">
+          <figure className="values__photo">
+            <img src={img("/images/together.webp")} alt="A woman smiling at a message on her phone while a man inside a facility reads his" width={1400} height={2488} />
+          </figure>
+          <div className="values__body">
           <h2 className="h2">What we hold ourselves to.</h2>
           <dl className="values__list">
             {values.map((v) => (
@@ -27,6 +27,7 @@ export default function About() {
               </div>
             ))}
           </dl>
+          </div>
         </div>
       </section>
 
