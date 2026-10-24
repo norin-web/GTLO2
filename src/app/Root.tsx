@@ -22,8 +22,8 @@ export default function Root() {
     const path = pathname.replace(/\/$/, "");
     const t = titles[path];
     // brand first, so a narrow browser tab still shows the app name; NotFound sets its own
-    if (t) document.title = `${site.brand} — ${t}`;
-    else if (!path) document.title = `${site.brand} — ${site.category}`;
+    if (t) document.title = `${site.brand}: ${t}`;
+    else if (!path) document.title = `${site.brand}: ${site.category}`;
   }, [pathname]);
 
   return (

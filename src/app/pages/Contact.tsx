@@ -1,7 +1,5 @@
 import { contactTopics, site } from "../content/site";
 import MailForm from "../components/MailForm";
-import Reveal from "../components/Reveal";
-import Split from "../components/Split";
 
 const tips = [
   "The facility name and city, if your question is about a contact",
@@ -14,19 +12,15 @@ export default function Contact() {
     <section className="phero">
       <div className="container contact">
         <div className="contact__copy">
-          <Reveal as="span" className="pill-label"><i />Contact</Reveal>
-          <Split as="h1" className="h-page" parts={[["Write to us."], ["\n"], ["A person will read it.", true]]} />
-          <Reveal as="p" className="lead" delay={150}>Questions, feedback or a privacy request: it all goes to one inbox.</Reveal>
-          <Reveal className="contact__mail" delay={200}>
-            <span className="kicker">Email</span>
-            <a href={`mailto:${site.email}`}>{site.email}</a>
-          </Reveal>
-          <Reveal className="contact__tips" delay={240}>
-            <h2>To get a faster answer, mention:</h2>
+          <h1 className="h-page">Write to us.</h1>
+          <p className="lead">Questions, feedback or a privacy request all go to one inbox.</p>
+          <a className="contact__mail" href={`mailto:${site.email}`}>{site.email}</a>
+          <div className="contact__tips">
+            <h2>A faster answer starts with:</h2>
             <ul>{tips.map((t) => <li key={t}>{t}</li>)}</ul>
-          </Reveal>
+          </div>
         </div>
-        <Reveal className="formcard" delay={120}>
+        <div className="formcard">
           <MailForm
             subject={`${site.brand}: message from the website`}
             submit="Send message"
@@ -37,7 +31,7 @@ export default function Contact() {
               { name: "message", label: "Message", textarea: true, required: true },
             ]}
           />
-        </Reveal>
+        </div>
       </div>
     </section>
   );

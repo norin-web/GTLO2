@@ -1,52 +1,49 @@
 import { site, values } from "../content/site";
+import { img } from "../utils/img";
 import Btn from "../components/Btn";
-import Reveal from "../components/Reveal";
-import Split from "../components/Split";
 
 export default function About() {
   return (
     <>
-      <section className="phero phero--center">
-        <div className="container container--narrow">
-          <Reveal as="span" className="pill-label"><i />About us</Reveal>
-          <Split as="h1" className="h-page" parts={[["Distance is hard."], ["\n"], ["Staying in touch shouldn’t be.", true]]} />
-          <Reveal as="p" className="lead" delay={150}>
-            When someone you love is in prison or jail, even sending a few words can turn into a chore: which facility, which service, which form. We built {site.brand} to take that friction away and leave room for what you actually want to say.
-          </Reveal>
+      <section className="phero">
+        <div className="container phero__narrow">
+          <h1 className="h-page">Distance is hard. Keeping in touch isn’t.</h1>
+          <p className="lead">A few words to someone inside should never turn into a chore.</p>
         </div>
       </section>
 
+      <div className="container">
+        <img className="wide-photo" src={img("/images/together.webp")} alt="A woman smiling at a message on her phone" width={1400} height={2488} />
+      </div>
+
       <section className="section">
-        <div className="container">
-          <div className="section-head">
-            <span className="kicker">What guides us</span>
-            <Split as="h2" className="h2" parts={[["Three things we don’t compromise on."]]} />
-          </div>
-          <ol className="values">
-            {values.map((v, i) => (
-              <Reveal as="li" key={v.title} className="value" line delay={i * 80}>
-                <span className="value__n">0{i + 1}</span>
-                <h3>{v.title}</h3>
-                <p className="muted">{v.text}</p>
-              </Reveal>
+        <div className="container values">
+          <h2 className="h2">What we hold ourselves to.</h2>
+          <dl className="values__list">
+            {values.map((v) => (
+              <div key={v.title}>
+                <dt>{v.title}</dt>
+                <dd>{v.text}</dd>
+              </div>
             ))}
-          </ol>
+          </dl>
         </div>
       </section>
 
       <section className="section section--tight">
         <div className="container">
-          <Reveal className="whois">
+          <div className="whois">
             <div>
-              <span className="kicker">Who runs it</span>
-              <h2 className="h3">{site.operator}</h2>
-              <p className="muted">develops and supports {site.brand}. Questions about the app, your subscription or your data go to one inbox, and a person reads every message.</p>
+              <h2 className="h3">{site.operator} runs {site.brand}.</h2>
+              <p>
+                We develop and support the app from Chisinau, Moldova, under a brand authorization from the GettingOut trademark owner. Questions about the app, your subscription or your data all go to one inbox.
+              </p>
             </div>
             <div className="whois__cta">
               <a className="whois__mail" href={`mailto:${site.email}`}>{site.email}</a>
               <Btn to="/app" variant="ghost">See the app</Btn>
             </div>
-          </Reveal>
+          </div>
         </div>
       </section>
     </>

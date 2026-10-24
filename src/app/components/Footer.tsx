@@ -10,7 +10,7 @@ const help = [
   { to: "/terms", label: "Terms of Use" },
 ];
 
-/** Light footer: brand card with the download on the left, link columns on the right. */
+/** Light footer: brand and download on the left, link columns on the right. */
 export default function Footer() {
   return (
     <footer className="footer">
@@ -43,7 +43,7 @@ export default function Footer() {
       </div>
 
       <div className="container footer__legal">
-        <p>© {site.year} {site.operator}. All rights reserved.</p>
+        <p>© {site.year} {site.operator}, {site.address}</p>
         <p>{site.disclaimer}</p>
       </div>
     </footer>

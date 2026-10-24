@@ -15,7 +15,7 @@ export default function MailForm({ subject, fields, submit }: { subject: string;
 
   const check = (f: Field, v = values[f.name] ?? "") => {
     if (f.required && !v.trim()) return `Please enter ${f.label.toLowerCase()}.`;
-    if (f.type === "email" && v && !/^\S+@\S+\.\S+$/.test(v)) return "That email doesn't look right — check for typos.";
+    if (f.type === "email" && v && !/^\S+@\S+\.\S+$/.test(v)) return "That email doesn’t look right. Check it for typos.";
     return "";
   };
 
@@ -72,9 +72,9 @@ export default function MailForm({ subject, fields, submit }: { subject: string;
       })}
       <div style={{ display: "flex", alignItems: "center", gap: "20px", flexWrap: "wrap" }}>
         <Btn type="submit">{submit}</Btn>
-        <span className="note">Opens your mail app · <a className="link" href={`mailto:${site.email}`}>{site.email}</a></span>
+        <span className="note">Opens your mail app, or write to <a className="link" href={`mailto:${site.email}`}>{site.email}</a></span>
       </div>
-      {sent && <p className="ok" role="status">Your mail app should open with the message ready. If it didn't, write to {site.email}.</p>}
+      {sent && <p className="ok" role="status">Your mail app should open with the message ready. If it didn’t, write to {site.email}.</p>}
     </form>
   );
 }

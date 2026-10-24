@@ -2,8 +2,6 @@ import { useState } from "react";
 import { Link } from "react-router";
 import { faq, site, topics } from "../content/site";
 import Faq from "../components/Faq";
-import Reveal from "../components/Reveal";
-import Split from "../components/Split";
 
 export default function Support() {
   const [t, setT] = useState<string>("All");
@@ -12,24 +10,23 @@ export default function Support() {
 
   return (
     <>
-      <section className="phero phero--center">
-        <div className="container container--narrow">
-          <Reveal as="span" className="pill-label"><i />Help center</Reveal>
-          <Split as="h1" className="h-page" parts={[["How can we help?"]]} />
-          <Reveal as="p" className="lead" delay={150}>Pick a topic to narrow the answers, or write to us if yours isn’t here.</Reveal>
+      <section className="phero phero--short">
+        <div className="container phero__narrow">
+          <h1 className="h-page">How can we help?</h1>
+          <p className="lead">Pick a topic to narrow the answers.</p>
         </div>
       </section>
 
       <section className="section section--top0">
         <div className="container help">
-          <aside className="help__topics" aria-label="Topics">
+          <div className="help__topics" role="group" aria-label="Topics">
             {["All", ...topics].map((x) => (
               <button key={x} className={`topic${t === x ? " is-on" : ""}`} aria-pressed={t === x} onClick={() => setT(x)}>
                 <span>{x}</span>
                 <small>{count(x)}</small>
               </button>
             ))}
-          </aside>
+          </div>
           <div className="help__list">
             <h2 className="h3">{t === "All" ? "All questions" : t}</h2>
             <Faq key={t} items={items} />
@@ -39,17 +36,16 @@ export default function Support() {
 
       <section className="section section--tight">
         <div className="container">
-          <Reveal className="whois">
+          <div className="whois">
             <div>
-              <span className="kicker">Still stuck?</span>
-              <h2 className="h3">Tell us what happened.</h2>
-              <p className="muted">Include the facility name and your iPhone model. It helps us answer faster.</p>
+              <h2 className="h3">Still stuck? Tell us what happened.</h2>
+              <p>Include the facility name and your iPhone model. It helps us answer faster.</p>
             </div>
             <div className="whois__cta">
               <a className="whois__mail" href={`mailto:${site.email}`}>{site.email}</a>
               <Link className="textlink" to="/contact">Open the contact form</Link>
             </div>
-          </Reveal>
+          </div>
         </div>
       </section>
     </>

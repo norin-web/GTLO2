@@ -5,7 +5,7 @@ type Props = {
   children: ReactNode;
   to?: string;
   href?: string;
-  variant?: "ink" | "blue" | "ghost";
+  variant?: "ink" | "paper" | "ghost";
   size?: "sm" | "md";
   className?: string;
   type?: "button" | "submit";

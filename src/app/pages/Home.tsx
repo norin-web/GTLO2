@@ -1,10 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router";
-import { app, chapters, faq, features, moments, notes } from "../content/site";
+import { app, chapters, features, moments, notes } from "../content/site";
 import { img } from "../utils/img";
 import Btn from "../components/Btn";
 import Icon from "../components/Icon";
-import Reveal from "../components/Reveal";
 import Split from "../components/Split";
 
 /** Chapter whose text crosses the middle of the viewport drives the sticky phone. */
@@ -28,42 +26,28 @@ export default function Home() {
 
   return (
     <>
-      {/* Hero */}
+      {/* Hero: the real app in a hand, the one authored motion is the headline */}
       <section className="hero">
         <div className="container hero__grid">
           <div className="hero__copy">
-            <Reveal as="span" className="pill-label"><i />Inmate messaging for iPhone</Reveal>
-            <Split as="h1" className="h-hero" parts={[["Keep the line open"], ["\n"], ["while they’re away.", true]]} />
-            <Reveal as="p" className="lead" delay={150}>
-              Find the facility, reach the person you love and write to them from your iPhone, with a gentle AI assistant for the days the words feel heavy.
-            </Reveal>
-            <Reveal className="hero__cta" delay={220}>
+            <Split as="h1" className="h-hero" parts={[["Keep the line open"], ["\n"], ["while they’re away."]]} />
+            <p className="lead">Find their facility and write to them from your iPhone.</p>
+            <div className="hero__cta">
               <Btn href={app.url}>Download on the App Store</Btn>
-              <a className="textlink" href="#story">See how it works</a>
-            </Reveal>
-            <Reveal as="ul" className="hero__facts" delay={280}>
-              <li><b>Free</b> to download</li>
-              <li><b>iOS {app.minIOS}</b> or later</li>
-              <li><b>{app.languages}</b> languages</li>
-            </Reveal>
+              <a className="textlink" href="#story">How it works</a>
+            </div>
+            <p className="hero__fine">Free to download. Needs iOS {app.minIOS} or later.</p>
           </div>
-          <Reveal className="hero__visual" delay={120}>
-            <div className="hero__glow" aria-hidden="true" />
-            <img className="hero__phone hero__phone--back" src={img("/images/phone-ai.webp")} alt="" width={380} height={807} />
-            <img className="hero__phone" src={img("/images/phone-home.webp")} alt="Getting Out home screen with favorites and conversations" width={380} height={803} />
-            <div className="chip chip--a"><Icon name="building" size={18} /><span><b>Maricopa County Jail</b><small>Phoenix, AZ</small></span></div>
-            <div className="chip chip--b"><Icon name="sparkles" size={18} /><span><b>Ask AI to write a message</b><small>You review every draft</small></span></div>
-          </Reveal>
+          <figure className="hero__visual">
+            <img src={img("/images/hand-phone.webp")} alt="A hand holding an iPhone with the Getting Out message list open" width={1100} height={1904} />
+          </figure>
         </div>
       </section>
 
-      {/* Scroll story */}
+      {/* How it works: a real five-step sequence, so the steps are numbered */}
       <section className="story" id="story">
         <div className="container">
-          <div className="section-head">
-            <Reveal as="span" className="kicker">How it works</Reveal>
-            <Split as="h2" className="h2" parts={[["From a name on a list"], ["\n"], ["to a message in their hands."]]} />
-          </div>
+          <h2 className="h2 story__title">From a name on a list to a message in their hands.</h2>
           <div className="story__grid">
             <div className="story__stage" aria-hidden="true">
               <div className="story__frame">
@@ -71,51 +55,45 @@ export default function Home() {
                   <img key={c.n} src={img(c.img)} alt="" width={380} height={807} className={i === active ? "is-on" : ""} loading={i ? "lazy" : "eager"} />
                 ))}
               </div>
-              <ol className="story__dots">
-                {chapters.map((c, i) => <li key={c.n} className={i === active ? "is-on" : ""} />)}
-              </ol>
             </div>
-            <div className="story__chapters">
+            <ol className="story__chapters">
               {chapters.map((c, i) => (
-                <article key={c.n} className={`chapter${i === active ? " is-on" : ""}`} data-i={i} ref={(el) => { refs.current[i] = el; }}>
-                  <span className="chapter__n">{c.n}</span>
-                  <span className="kicker">{c.kicker}</span>
+                <li key={c.n} className={`chapter${i === active ? " is-on" : ""}`} data-i={i} ref={(el) => { refs.current[i] = el; }}>
+                  <span className="chapter__n">Step {i + 1}</span>
                   <h3 className="h3">{c.title}</h3>
-                  <p className="muted">{c.text}</p>
+                  <p>{c.text}</p>
                   <img className="chapter__shot" src={img(c.img)} alt={c.alt} width={380} height={807} loading="lazy" />
-                </article>
+                </li>
               ))}
-            </div>
+            </ol>
           </div>
         </div>
       </section>
 
-      {/* Features */}
-      <section className="section section--mist">
-        <div className="container">
-          <div className="section-head section-head--row">
-            <Split as="h2" className="h2" parts={[["Small tools for"], ["\n"], ["a long distance."]]} />
-            <Reveal as="p" className="muted section-head__aside">Everything in the app serves one purpose: helping you stay part of their life.</Reveal>
-          </div>
-          <ul className="features">
-            {features.map((f, i) => (
-              <Reveal as="li" key={f.title} className="feature" delay={(i % 3) * 70}>
-                <span className="feature__icon"><Icon name={f.icon} size={22} /></span>
-                <h3>{f.title}</h3>
-                <p className="muted">{f.text}</p>
-              </Reveal>
+      {/* What is in the app: a plain list, not a card grid */}
+      <section className="section">
+        <div className="container inapp">
+          <h2 className="h2">Small tools for a long distance.</h2>
+          <ul className="inapp__list">
+            {features.map((f) => (
+              <li key={f.title}>
+                <Icon name={f.icon} size={22} />
+                <div>
+                  <h3>{f.title}</h3>
+                  <p>{f.text}</p>
+                </div>
+              </li>
             ))}
           </ul>
         </div>
       </section>
 
       {/* AI demo */}
-      <section className="section">
+      <section className="section section--mist">
         <div className="container ai">
           <div className="ai__copy">
-            <Reveal as="span" className="kicker">AI assistant</Reveal>
-            <Split as="h2" className="h2" parts={[["Help with the words,"], ["\n"], ["not with the feelings."]]} />
-            <Reveal as="p" className="lead">Some letters are hard to start. Describe the moment and the assistant offers a first draft. You keep what sounds like you.</Reveal>
+            <h2 className="h2">Help with the words, not with the feelings.</h2>
+            <p className="lead">Some letters are hard to start. Pick a moment and see the kind of first draft the assistant offers.</p>
             <div className="ai__chips" role="tablist" aria-label="Pick a moment">
               {moments.map((x, i) => (
                 <button key={x.label} role="tab" aria-selected={i === m} className={`chipbtn${i === m ? " is-on" : ""}`} onClick={() => setM(i)}>
@@ -124,63 +102,38 @@ export default function Home() {
               ))}
             </div>
           </div>
-          <Reveal className="ai__chat" delay={100}>
-            <div className="ai__bar"><Icon name="sparkles" size={16} />AI Assistant</div>
+          <div className="ai__chat" aria-live="polite">
+            <p className="ai__bar"><Icon name="sparkles" size={16} />AI Assistant</p>
             <div className="ai__thread" key={m}>
               <p className="bubble bubble--me">{moments[m].ask}</p>
               <p className="bubble bubble--ai">{moments[m].draft}</p>
-              <span className="ai__note">Example draft · always review before sending</span>
+              <p className="ai__note">An example written for this page. Always read a draft before you send it.</p>
             </div>
-          </Reveal>
+          </div>
         </div>
       </section>
 
       {/* Good to know */}
-      <section className="section section--tight">
-        <div className="container">
-          <Reveal as="h2" className="h3 notes__title">Good to know before you start</Reveal>
-          <ol className="notes">
-            {notes.map((n, i) => (
-              <Reveal as="li" key={n.title} className="gk" delay={i * 70}>
-                <span className="gk__n">{i + 1}</span>
-                <div>
-                  <h3>{n.title}</h3>
-                  <p className="muted">{n.text}</p>
-                </div>
-              </Reveal>
-            ))}
-          </ol>
-        </div>
-      </section>
-
-      {/* Questions */}
-      <section className="section section--mist">
-        <div className="container">
-          <div className="section-head section-head--row">
-            <Split as="h2" className="h2" parts={[["Questions people ask first."]]} />
-            <Link className="textlink" to="/support">All answers in Help</Link>
-          </div>
-          <div className="qcards">
-            {[faq[0], faq[3], faq[6]].map((f, i) => (
-              <Reveal key={f.q} className="qcard" delay={i * 70}>
-                <span className="kicker">{f.topic}</span>
-                <h3>{f.q}</h3>
-                <p className="muted">{f.a}</p>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
       <section className="section">
-        <div className="container">
-          <Reveal className="cta">
-            <img src={img("/images/app-icon.png")} alt="" width={76} height={76} />
-            <h2 className="h2">Write the first line today.</h2>
-            <p className="lead">The wait is long. A message makes it a little shorter.</p>
-            <Btn href={app.url}>Download on the App Store</Btn>
-          </Reveal>
+        <div className="container notes">
+          <h2 className="h2">Good to know before you start.</h2>
+          <dl className="notes__list">
+            {notes.map((n) => (
+              <div key={n.title}>
+                <dt>{n.title}</dt>
+                <dd>{n.text}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </section>
+
+      {/* Closing action */}
+      <section className="closing">
+        <div className="container closing__inner">
+          <img src={img("/images/app-icon.png")} alt="" width={72} height={72} />
+          <h2 className="h2">Write the first line today.</h2>
+          <Btn href={app.url} variant="paper">Download on the App Store</Btn>
         </div>
       </section>
     </>

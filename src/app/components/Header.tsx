@@ -5,7 +5,7 @@ import Btn from "./Btn";
 import Icon from "./Icon";
 
 /**
- * Desktop: one floating capsule (logo · links · Download), always pinned.
+ * Desktop: one floating capsule with the logo, links and Download, always pinned.
  * Mobile: slim top bar with logo + Download, and an iOS-style tab bar at the bottom.
  */
 export default function Header() {

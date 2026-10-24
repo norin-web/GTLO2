@@ -2,8 +2,6 @@ import { Fragment, useEffect, useMemo, useState, type ReactNode } from "react";
 import { Link } from "react-router";
 import { site } from "../content/site";
 import { legalUpdated, type Doc } from "../content/legal";
-import Reveal from "./Reveal";
-import Split from "./Split";
 import Btn from "./Btn";
 
 type Section = { id: string; n: number; title: string; blocks: string[] };
@@ -51,14 +49,14 @@ export default function LegalPage({ doc }: { doc: Doc }) {
 
   return (
     <>
-      <section className="phero phero--center">
-        <div className="container container--narrow">
+      <section className="phero phero--short">
+        <div className="container phero__narrow">
           <nav className="seg" aria-label="Legal documents">
             <Link to="/privacy" className={doc.current === "privacy" ? "is-on" : ""}>Privacy</Link>
             <Link to="/terms" className={doc.current === "terms" ? "is-on" : ""}>Terms</Link>
           </nav>
-          <Split as="h1" className="h-page" parts={[[doc.title]]} />
-          <Reveal as="p" className="lead" delay={150}>{doc.summary}</Reveal>
+          <h1 className="h-page">{doc.title}</h1>
+          <p className="lead">{doc.summary}</p>
           {dated && <p className="legal__meta">Last updated {legalUpdated}</p>}
         </div>
       </section>
@@ -68,7 +66,7 @@ export default function LegalPage({ doc }: { doc: Doc }) {
           {sections.length ? (
             <div className="legal">
               <nav className="legal__toc" aria-label="Contents">
-                <b>Contents</b>
+                <p className="legal__toc-title">Contents</p>
                 {sections.map((s) => (
                   <a key={s.id} href={`#${s.id}`} className={active === s.n ? "is-on" : ""}>
                     <span>{s.n}</span>
@@ -87,10 +85,9 @@ export default function LegalPage({ doc }: { doc: Doc }) {
             </div>
           ) : (
             <div className="legal__body legal__empty">
-              <span className="kicker">Coming to this page</span>
               <h2 className="h3">The full {doc.title} will be published here.</h2>
-              <p className="muted">Until then, the current version is the one linked from our App Store listing. Questions about it: <a className="link" href={`mailto:${site.email}`}>{site.email}</a>.</p>
-              <Btn href={doc.source} variant="ghost">Read the current {doc.title}</Btn>
+              <p className="muted">Questions about it in the meantime: <a className="link" href={`mailto:${site.email}`}>{site.email}</a>.</p>
+              <Btn to="/support" variant="ghost">Visit Help</Btn>
             </div>
           )}
         </div>
